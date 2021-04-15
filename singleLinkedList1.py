@@ -1,6 +1,3 @@
-
-
-
 class Node:
     # This class provides a generic node for a linked list. 
     def __init__(self, number):
@@ -17,10 +14,10 @@ class SingleLinkedList:
             print("List has no element")
             return
         else:
-            n = self.headPtr
-            while n is not None:
-                print (n.value, " ")
-                n = n.next
+            iterative_node= self.headPtr
+            while iterative_node is not None:
+                print (iterative_node.value, " ")
+                iterative_node = iterative_node.next
 
     def insert_at_start(self, number):
         new_node = Node(number)
@@ -32,24 +29,24 @@ class SingleLinkedList:
         if self.headPtr is None:
             self.headPtr = new_node
             return
-        n = self.headPtr
-        while n.next is not None:
-            n= n.next
-        n.next = new_node
+        iterative_node = self.headPtr
+        while iterative_node.next is not None:
+            iterative_node = iterative_node.next
+        iterative_node.next = new_node
 
     def insert_after_value(self, x, number):
-        n = self.headPtr
-        print(n.next)
-        while n is not None:
-            if n.value == x:
+        iterative_node = self.headPtr
+        print(iterative_node.next)
+        while iterative_node is not None:
+            if iterative_node.value == x:
                 break
-            n = n.next
-        if n is None:
+            iterative_node = iterative_node.next
+        if iterative_node is None:
             print("value not in the list")
         else:
             new_node = Node(number)
-            new_node.next = n.next
-            n.next = new_node
+            new_node.next = iterative_node.next
+            iterative_node.next = new_node
 
     def insert_before_value(self, x, number):
         if self.headPtr is None:
@@ -62,18 +59,18 @@ class SingleLinkedList:
             self.headPtr = new_node
             return
 
-        n = self.headPtr
-        print(n.next)
-        while n.next is not None:
-            if n.next.value == x:
+        iterative_node = self.headPtr
+        print(iterative_node.next)
+        while iterative_node.next is not None:
+            if iterative_node.next.value == x:
                 break
-            n = n.next
-        if n.next is None:
+            iterative_node = iterative_node.next
+        if iterative_node.next is None:
             print("value not in the list")
         else:
             new_node = Node(number)
-            new_node.next = n.next
-            n.next = new_node
+            new_node.next = iterative_node.next
+            iterative_node.next = new_node
 
     def insert_at_index(self, index, number):
         if index == 1:
@@ -81,38 +78,38 @@ class SingleLinkedList:
             new_node.next = self.headPtr
             self.headPtr = new_node
         i = 1
-        n = self.headPtr
-        while i < index-1 and n is not None:
-            n = n.next
+        iterative_node = self.headPtr
+        while i < index-1 and iterative_node is not None:
+            iterative_node = iterative_node.next
             i = i+1
-        if n is None:
+        if iterative_node is None:
             print("Index out of bound")
         else: 
             new_node = Node(number)
-            new_node.next = n.next
-            n.next = new_node
+            new_node.next = iterative_node.next
+            iterative_node.next = new_node
 
 
     def get_count(self):
         if self.headPtr is None:
             return 0
-        n = self.headPtr
+        iterative_node = self.headPtr
         count = 0
-        while n is not None:
+        while iterative_node is not None:
             count = count + 1
-            n = n.next
+            iterative_node = iterative_node.next
         return "The count is " + str(count) + "."
     
     def search_value(self, x):
         if self.headPtr is None:
             print("List has no elements")
             return
-        n = self.headPtr
-        while n is not None:
-            if n.value == x:
+        iterative_node = self.headPtr
+        while iterative_node is not None:
+            if iterative_node.value == x:
                 print("value found")
                 return True
-            n = n.next
+            iterative_node = iterative_node.next
         print("value not found")
         return False
 
@@ -137,10 +134,10 @@ class SingleLinkedList:
             print("The list has no element to delete")
             return
 
-        n = self.headPtr
-        while n.next.next is not None:
-            n = n.next
-        n.next = None
+        iterative_node = self.headPtr
+        while iterative_node.next.next is not None:
+           iterative_node = iterative_node.next
+        iterative_node.next = None
 
     def delete_element_by_value(self, x):
         if self.headPtr is None:
@@ -152,47 +149,47 @@ class SingleLinkedList:
             self.headPtr = self.headPtr.next
             return
 
-        n = self.headPtr
-        while n.next is not None:
-            if n.next.value == x:
+        iterative_node = self.headPtr
+        while iterative_node.next is not None:
+            if iterative_node.next.value == x:
                 break
-            n = n.next
+            iterative_node = iterative_node.next
 
-        if n.next is None:
+        if iterative_node.next is None:
             print("value not found in the list")
         else:
-            n.next = n.next.next
+            iterative_node.next = iterative_node.next.next
 
     def reverse_linkedlist(self):
         prev = None
-        n = self.headPtr
-        while n is not None:
-            next = n.next
-            n.next = prev
-            prev = n
-            n = next
+        iterative_node = self.headPtr
+        while iterative_node is not None:
+            next = iterative_node.next
+            iterative_node.next = prev
+            prev = iterative_node
+            iterative_node= next
         self.headPtr = prev
 
 
-print("-------- WELCOME PEEPS ---------")
-testList = SingleLinkedList()
-testList.insert_at_start(5)
-testList.insert_at_end(10)
-testList.insert_after_value(5, 4)
-testList.insert_before_value(10, 12)
-testList.insert_at_index(3, 8)
-testList.traverse_list()
-##print(testList.get_count())
-##testList.search_value(10)
-##print(testList.make_new_list())
-##testList.delete_at_start()
-##testList.traverse_list()
-##print(testList.get_count())
-##testList.delete_at_end()
-##testList.traverse_list()
-##print(testList.get_count())
-testList.delete_element_by_value(8)
-testList.traverse_list()
-##print(testList.get_count())
+#print("-------- WELCOME PEEPS ---------")
+#testList = SingleLinkedList()
+#testList.insert_at_start(5)
+#testList.insert_at_end(10)
+#testList.insert_after_value(5, 4)
+#testList.insert_before_value(10, 12)
+#testList.insert_at_index(3, 8)
+#testList.traverse_list()
+#print(testList.get_count())
+#testList.search_value(10)
+#print(testList.make_new_list())
+#testList.delete_at_start()
+#testList.traverse_list()
+#print(testList.get_count())
+#testList.delete_at_end()
+#testList.traverse_list()
+#print(testList.get_count())
+#testList.delete_element_by_value(8)
+#testList.traverse_list()
+#print(testList.get_count())
 #testList.reverse_linkedlist()
 #testList.traverse_list()
