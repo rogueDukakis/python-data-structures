@@ -16,7 +16,7 @@ class IRS_Single_Linked_List:
         else:
             iterative_node= self.headPtr
             while iterative_node is not None:
-                print (iterative_node.value, " ")
+                print (iterative_node.value, " ", iterative_node.name, " ")
                 iterative_node = iterative_node.next
 
     def insert_at_end(self, number, name):
@@ -85,38 +85,44 @@ r_ssn_counter = 0
 # Defining a single linked list object 
 irs_list = IRS_Single_Linked_List()
 
-
+#  STARTING HERE -- add an infinite loop while(1):
 # TODO: Add File reader function to get info from sample.txt
 # While reading the file
 
 # If the letter code is i
-if i_d_r == 'i':
-    name = input("Please provide your full name: ")
-    number = input("Please input your social security number: ")
-    # You want to insert the new name and ssn only IF it is not in the data structure
-    if (irs_list.search_value(number)) == True:
-        print ("This SSN number already exists under a different name.")
-    else:
-        irs_list.insert_at_end(number, name)
-        i_ssn_counter += 1
-        print ("This SSN/Name has been added to our system.")
+are_you_done = 0
+while are_you_done is not 1:
+    if i_d_r == 'i':
+        name = input("Please provide your full name: ")
+        number = input("Please input your social security number: ")
+        # You want to insert the new name and ssn only IF it is not in the data structure
+        if (irs_list.search_value(number)) == True:
+            print ("This SSN number already exists under a different name.")
+        else:
+            irs_list.insert_at_end(number, name)
+            i_ssn_counter += 1
+            print ("This SSN/Name has been added to our system.")
+
+    if i_d_r == 'd':
+        x = input("Please input the social security number you want to delete: ")
+        if irs_list.search_value(x) == True:
+            irs_list.delete_element_by_value(x)
+            print("The social security number you have entered and the name associated with it has been deleted.")
+            d_ssn_counter += 1
+        else:
+            print("The social security number you have input does not exist.")
+
+    if i_d_r == 'r':
+        x = input("Please input the social security number you want to retrieve: ")
+        if irs_list.search_value(x) is True:
+            print ("The social security number you entered has been found in our database.")
+            r_ssn_counter += 1
+        else:
+            print("The social security number you entered has not been found in our system.")
     
-if i_d_r == 'd':
-    x = input("Please input the social security number you want to delete: ")
-    if irs_list.search_value(x) == True:
-        irs_list.delete_element_by_value(x)
-        print("The social security number you have entered and the name associated with it has been deleted.")
-        d_ssn_counter += 1
-    else:
-        print("The social security number you have input does not exist.")
+    are_you_done = int(input("are you done? if so type 1, if not type 0."))
+    if are_you_done >1 and are_you_done < 0:
+        print("You did not pick one of the two choices. You are being directed pack to the original input question.")
 
-if i_d_r == 'r':
-    x = input("Please input the social security number you want to retrieve: ")
-    if irs_list.search_value(x) is True:
-        print ("The social security number you entered has been found in our database.")
-        r_ssn_counter += 1
-    else:
-        print("The social security number you entered has not been found in our system.")
-
-irs_list.traverse_list()
+    irs_list.traverse_list()
 
